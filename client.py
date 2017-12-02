@@ -1,0 +1,35 @@
+import io
+import time
+import socket
+import pyscreenshot as ImageGrab
+
+class client:
+
+	# Constructor
+	def __init__(self, address, port, packet_size=4096):
+		self.address = address
+		self.port = port
+		self.packet_size = packet_size
+	
+	# Socket creation
+	def create_socket(self):
+		connection = (self.address, self.port)
+		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		sock = socket.create_connection(connection)
+		sock.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, self.packet_size)
+		sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+		return sock
+
+	# Start client
+	def start(self):
+		sock = self.create_socket()
+		while True:
+			steam_buffer = io.BytesIO()
+			ImageGrab.grab().save(steam_buffer,'PNG')
+			screenshot = steam_buffer.getvalue()
+			sock.sendall(screenshot)
+			time.sleep(0.1)
+
+if __name__ == '__main__':
+	elclient = client('127.0.0.1',9595)
+	elclient.start()
