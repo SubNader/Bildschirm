@@ -2,15 +2,15 @@ import io
 import time
 import socket
 import pyscreenshot as ImageGrab
-
+from gzip import zlib
 class client:
 
 	# Constructor
-	def __init__(self, address, port, packet_size=4096):
+	def __init__(self, address, port, packet_size=4096000):
 		self.address = address
 		self.port = port
 		self.packet_size = packet_size
-	
+
 	# Socket creation
 	def create_socket(self):
 		connection = (self.address, self.port)
@@ -27,6 +27,8 @@ class client:
 			steam_buffer = io.BytesIO()
 			ImageGrab.grab().save(steam_buffer,'PNG')
 			screenshot = steam_buffer.getvalue()
+			# Compress screenshot
+			screenshot = zlib.compress(screenshot)
 			sock.sendall(screenshot)
 			time.sleep(0.1)
 
