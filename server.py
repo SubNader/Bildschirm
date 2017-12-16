@@ -5,10 +5,10 @@ from socket import *
 from PIL import Image
 from socket import error as socket_error
 from gzip import zlib
+
 class server:
 
 	# Constructor
-	#def __init__(self, address, port, packet_size=4096):
 	def __init__(self, address, port, packet_size=409600):
 		self.address = address
 		self.port = port
