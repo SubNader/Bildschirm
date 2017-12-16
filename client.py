@@ -27,8 +27,6 @@ class client:
 
 	# Start client
 	def start(self):
-
-
 		sock = self.create_socket()
 		while True:
 			try:
