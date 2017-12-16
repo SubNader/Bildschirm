@@ -34,16 +34,19 @@ class server:
 			stream_buffer = ''
 			try:
 				while True:
-					received_data = connection.recv(self.packet_size)
-					stream_buffer += received_data
-					if len(received_data) < self.packet_size:
-						# Decompress recived data
-						stream_buffer=zlib.decompress(stream_buffer)
-						image = Image.open(io.BytesIO(stream_buffer))
-						display = plt.imshow(image, interpolation='nearest', aspect='auto')
-						plt.pause(0.1)
-						stream_buffer = ''
-						time.sleep(0.1)
+					try:
+						received_data = connection.recv(self.packet_size)
+						stream_buffer += received_data
+						if len(received_data) < self.packet_size:
+							# Decompress received data
+							stream_buffer=zlib.decompress(stream_buffer)
+							image = Image.open(io.BytesIO(stream_buffer))
+							display = plt.imshow(image, interpolation='nearest', aspect='auto')
+							plt.pause(0.1)
+							stream_buffer = ''
+							time.sleep(0.1)
+					except:
+						print "[!] Failed to Render screenshot"
 			except socket_error as e:
 				print 'Error encountered.\n{}\nExiting..'.format(e)
 				sock.close()
