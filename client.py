@@ -3,6 +3,8 @@ import time
 import socket
 import pyscreenshot as ImageGrab
 from gzip import zlib
+
+
 class client:
 
 	# Constructor
@@ -31,12 +33,12 @@ class client:
 		while True:
 			try:
 				stream_buffer = io.BytesIO()
-			  ImageGrab.grab().save(stream_buffer,'PNG')
-			  screenshot = stream_buffer.getvalue()
-			  # Compress screenshot
-			  screenshot = zlib.compress(screenshot)
-			  sock.sendall(screenshot)
-			  time.sleep(0.1)
+				ImageGrab.grab().save(stream_buffer,'PNG')
+			  	screenshot = stream_buffer.getvalue()
+			  	# Compress screenshot
+			  	screenshot = zlib.compress(screenshot)
+			  	sock.sendall(screenshot)
+			  	time.sleep(0.1)
 			 except:
 				print "[!] Error starting client.... trying again"
 				time.sleep(2)
